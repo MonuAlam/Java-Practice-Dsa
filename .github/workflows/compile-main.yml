@@ -1,0 +1,23 @@
+name: Compile Java Code + Approval (Main)
+
+on:
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up JDK
+        uses: actions/setup-java@v4
+        with:
+          java-version: '17'
+
+      - name: Compile all Java files
+        run: |
+          find src -name "*.java" > sources.txt
+          javac @sources.txt
